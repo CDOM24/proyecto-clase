@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tienda</title>
+@extends('layout.app')
 
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
-</head>
-
-<body>
-
-@include('layout.navbar')
-
+@section('content')
 
 <!-- CONTENIDO -->
 <div class="container">
@@ -53,7 +41,4 @@
     </div>
 </div>
 
-<!-- FOOTER -->
-@include('layout.footer')
-</body>
-</html>
+@endsection
