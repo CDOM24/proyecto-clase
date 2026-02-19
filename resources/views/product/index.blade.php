@@ -11,13 +11,10 @@
 
 <body>
 
-<header>
-    <h1>✨ Tienda</h1>
-    <div class="search-bar">
-        <input type="text" placeholder="Buscar productos...">
-    </div>
-</header>
+@include('layout.navbar')
 
+
+<!-- CONTENIDO -->
 <div class="container">
     <div class="product-grid">
 
@@ -56,5 +53,7 @@
     </div>
 </div>
 
+<!-- FOOTER -->
+@include('layout.footer')
 </body>
 </html>

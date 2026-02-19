@@ -10,6 +10,9 @@
 
 <body>
 
+@include('layout.navbar')
+
+<!-- CONTENIDO -->
 <div class="detail-wrapper">
 
     <div class="detail-grid">
@@ -40,12 +43,14 @@
                 <button class="btn btn-primary">Agregar al carrito</button>
                 <button class="btn btn-secondary">Volver</button>
             </div>
-
-        </div>
-
+        
     </div>
 
 </div>
+
+<!-- FOOTER -->
+@include('layout.footer')
+
 
 </body>
 </html>

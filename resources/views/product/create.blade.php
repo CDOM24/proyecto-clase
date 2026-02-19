@@ -10,6 +10,9 @@
 
 <body>
 
+@include('layout.navbar')
+
+<!-- CONTENIDO -->
 <div class="form-wrapper">
 
     <div class="form-header">
@@ -57,6 +60,9 @@
     </form>
 
 </div>
+
+@include('layout.footer')
+
 
 </body>
 </html>

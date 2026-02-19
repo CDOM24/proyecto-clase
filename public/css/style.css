@@ -194,6 +194,47 @@ textarea {
 .out {
     background: #ff4444;
 }
+/* NAVBAR */
+.navbar {
+    padding: 20px;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-container nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 500;
+}
+
+.logo {
+    font-size: 22px;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 30px;
+    margin-top: 40px;
+    opacity: 0.8;
+}
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
