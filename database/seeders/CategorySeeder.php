@@ -18,7 +18,7 @@ class CategorySeeder extends Seeder
         $category1->save();
 
         $category2 = new Category();
-        $category2->name = 'Tecnologia';
+        $category2->name = '';
         $category2->description = 'Esta es la descripcion de la tecnologia';
 
         $category2->save();
