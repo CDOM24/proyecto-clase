@@ -5,40 +5,31 @@
 <!-- CONTENIDO -->
 <div class="container">
     <div class="product-grid">
+        @foreach ($misProductos as $product)
 
-        <div class="product-card">
-            <img src="https://picsum.photos/300/200?5">
-            <div class="product-title">Control Gamer RGB Elite</div>
-            <div class="rating">★★★★★</div>
-            <div class="price">$59.99</div>
-            <button class="btn">Agregar al carrito</button>
+        <div class="product-card-enhanced">
+            <div class="product-image">
+                <span class="status-badge badge-active">Activo</span>
+                <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400" alt="">
         </div>
 
-        <div class="product-card">
-            <img src="https://picsum.photos/300/200?6">
-            <div class="product-title">Headset Pro Sound 7.1</div>
-            <div class="rating">★★★★☆</div>
-            <div class="price">$89.99</div>
-            <button class="btn">Agregar al carrito</button>
-        </div>
+    <div class="product-info">
+        <h3 class="product-name">{{ $product->name }}</h3>
 
-        <div class="product-card">
-            <img src="https://picsum.photos/300/200?7">
-            <div class="product-title">Teclado Mecánico Neon Edition</div>
-            <div class="rating">★★★★★</div>
-            <div class="price">$109.99</div>
-            <button class="btn">Agregar al carrito</button>
-        </div>
+        <div class="product-price">{{ $product->price }}</div>
 
-        <div class="product-card">
-            <img src="https://picsum.photos/300/200?8">
-            <div class="product-title">Mouse Gaming Ultra Speed</div>
-            <div class="rating">★★★★☆</div>
-            <div class="price">$44.99</div>
-            <button class="btn">Agregar al carrito</button>
-        </div>
+        <p class="product-desc">
+            {{ $product->description }}
+        </p>
 
-    </div>
+        <div class="card-actions">
+            <button class="btn btn-secondary">Editar</button>
+            <button class="btn btn-primary">Detalles</button>
+        </div>
+</div>
+    @endforeach
+
+    
 </div>
 
 @endsection
