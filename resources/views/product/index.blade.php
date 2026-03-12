@@ -10,8 +10,13 @@
         <div class="product-card-enhanced">
             <div class="product-image">
                 <span class="status-badge badge-active">Activo</span>
-                <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=400" alt="">
-        </div>
+                @if ($product->image)
+                <img src="{{ asset('storage/' . $product->image) }}" alt="">
+                @else
+                <img src="https://preview.redd.it/this-is-mudkip-to-make-him-happy-plz-say-nice-things-to-him-v0-6cts5sv00wk61.jpg?auto=webp&s=52833ae4ab952b49b3fe2372f6bf87db52c842b8" alt="">
+                @endif
+            </div>
+
 
     <div class="product-info">
         <h3 class="product-name">{{ $product->name }}</h3>
