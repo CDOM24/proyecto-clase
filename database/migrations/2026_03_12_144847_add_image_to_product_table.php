@@ -6,25 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::table('product', function (Blueprint $table) {
-                $table->string('image')->nullable()->after('price')->before('category_id');
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('image')->nullable()->after('price');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::table('product', function (Blueprint $table) {
-
-                $table->dropColumn('image');
-            
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('image');
         });
     }
 };

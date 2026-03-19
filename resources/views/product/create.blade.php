@@ -8,10 +8,19 @@
 
         <div class="form-header">
             <h2>Agregar Nuevo Producto</h2>
-            <div class="product-id">ID: #1024</div>
         </div>
 
-        <form action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data">
+        @if ($errors->any())
+            <div>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="form-group">
@@ -20,7 +29,6 @@
                     type="text" 
                     id="nombre" 
                     name="nombre" 
-                    placeholder="Ej: Teclado Mecánico RGB"
                     required
                 >
             </div>
@@ -28,22 +36,23 @@
             <div class="row">
 
                 <div class="form-group">
-                    <label for="precio">Precio (USD)</label>
+                    <label for="precio">Precio</label>
                     <input 
                         type="number" 
                         id="precio" 
                         name="precio" 
                         step="0.01"
-                        placeholder="$0.00"
                         required
                     >
                 </div>
 
                 <div class="form-group">
-                    <label for="estado">Categoría</label>
-                    <select id="estado" name="categoria">
+                    <label for="categoria">Categoría</label>
+                    <select id="categoria" name="categoria">
                         @foreach ($categoryList as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}">
+                                {{ $category->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -51,12 +60,11 @@
             </div>
 
             <div class="form-group">
-                <label for="imagen">Imagen del Producto</label>
+                <label for="imagen">Imagen</label>
                 <input 
                     type="file" 
                     id="imagen" 
                     name="imagen"
-                    accept="image/*"
                 >
             </div>
 
@@ -65,11 +73,10 @@
                 <textarea 
                     id="descripcion" 
                     name="descripcion"
-                    placeholder="Describe el producto..."
                 ></textarea>
             </div>
 
-            <button type="submit" class="btn-submit">
+            <button type="submit">
                 Guardar Producto
             </button>
 
@@ -79,4 +86,4 @@
 
 </div>
 
-@endsection
+@endsection 

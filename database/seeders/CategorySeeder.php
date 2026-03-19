@@ -2,25 +2,24 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
 
 class CategorySeeder extends Seeder
 {
-    
     public function run(): void
     {
-        $category1 = new Category();
-        $category1->name = 'Electrodomestico';
-        $category1->description = 'Esta es la descripcion del electrodomestico';
+        $categories = [
+            ['name' => 'Electrodomésticos', 'description' => 'Productos para el hogar'],
+            ['name' => 'Tecnología', 'description' => 'Dispositivos electrónicos'],
+            ['name' => 'Ropa', 'description' => 'Vestimenta y accesorios'],
+            ['name' => 'Deportes', 'description' => 'Artículos deportivos'],
+            ['name' => 'Hogar', 'description' => 'Decoración y muebles'],
+            ['name' => 'Juguetes', 'description' => 'Productos para niños'],
+        ];
 
-        $category1->save();
-
-        $category2 = new Category();
-        $category2->name = '';
-        $category2->description = 'Esta es la descripcion de la tecnologia';
-
-        $category2->save();
+        foreach ($categories as $cat) {
+            Category::create($cat);
+        }
     }
 }

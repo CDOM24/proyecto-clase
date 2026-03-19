@@ -1,24 +1,26 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
 
+
 class ProductController extends Controller
 {
     public function index()
     {
-        $productList = Product::all(10)->orderBy('id','desc')->get();
+        $productList = Product::orderBy('id','desc')->get();
 
-        
         return view("product.index", [
             "misProductos" => $productList
-        ]); 
+        ]);
     }
-    public function create(){
 
+    public function create()
+    {
         $categoryList = Category::all();
 
         return view("product.create", [
@@ -26,29 +28,51 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(Request $request){
-        //dd ($request->all());
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
 
-        $newProduct = new Product();
-        $newProduct->name = $request->get("nombre");
-        $newProduct->description = $request->get("descripcion");
-        $newProduct->price = $request->get("precio");
-        $newProduct->category_id = $request->get("categoria");
-        
-        if ($request->hasFile("imagen")){
-            $ruta = $request->file("imagen")->store('images',"public") ;
-            $newProduct->image = $ruta;
-        }
-        $newProduct->save();
-        
-        return redirect()->route("product.index");  
-
-        }
-
-    public function show($producto){
-        return view("product.show");
+        return view("product.show", [
+            "product" => $product
+        ]);
     }
-    
 
+    public function destroy($id)
+{
+    $product = Product::findOrFail($id);
 
+    if ($product->image) {
+        Storage::disk('public')->delete($product->image);
+    }
+
+    $product->delete();
+
+    return redirect()->route("product.index");
+}
+   public function store(Request $request)
+{ 
+    $request->validate([
+        'nombre' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'precio' => 'required|numeric|min:0',
+        'categoria' => 'required|exists:categories,id',
+        'imagen' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+    ]);
+
+    $newProduct = new Product();
+    $newProduct->name = $request->nombre;
+    $newProduct->description = $request->descripcion;
+    $newProduct->price = $request->precio;
+    $newProduct->category_id = $request->categoria;
+
+    if ($request->hasFile("imagen")) {
+        $ruta = $request->file("imagen")->store('images', "public");
+        $newProduct->image = $ruta;
+    }
+
+    $newProduct->save();
+
+    return redirect()->route("product.index")
+    ->with('success', 'Producto creado correctamente');
+}
 }

@@ -2,39 +2,64 @@
 
 @section('content')
 
-<!-- CONTENIDO -->
 <div class="container">
     <div class="product-grid">
-        @foreach ($misProductos as $product)
+
+        @forelse ($misProductos as $product)
 
         <div class="product-card-enhanced">
+
             <div class="product-image">
                 <span class="status-badge badge-active">Activo</span>
-                @if ($product->image)
-                <img src="{{ asset('storage/' . $product->image) }}" alt="">
+
+                @if ($product->image && file_exists(public_path('storage/' . $product->image)))
+                    <img src="{{ asset('storage/' . $product->image) }}" alt="">
                 @else
-                <img src="https://preview.redd.it/this-is-mudkip-to-make-him-happy-plz-say-nice-things-to-him-v0-6cts5sv00wk61.jpg?auto=webp&s=52833ae4ab952b49b3fe2372f6bf87db52c842b8" alt="">
+                    <img src="https://via.placeholder.com/300x200?text=Sin+imagen" alt="">
                 @endif
             </div>
 
+            <div class="product-info">
+                <h3 class="product-name">{{ $product->name }}</h3>
 
-    <div class="product-info">
-        <h3 class="product-name">{{ $product->name }}</h3>
+                <div class="product-price">
+                    ${{ number_format($product->price, 2) }}
+                </div>
 
-        <div class="product-price">{{ $product->price }}</div>
+                <p class="product-desc">
+                    {{ $product->description }}
+                </p>
 
-        <p class="product-desc">
-            {{ $product->description }}
-        </p>
+                <div class="card-actions">
 
-        <div class="card-actions">
-            <button class="btn btn-secondary">Editar</button>
-            <button class="btn btn-primary">Detalles</button>
+                    <a href="{{ route('product.show', $product->id) }}" class="btn btn-primary">
+                        Detalles
+                    </a>
+
+                    <a href="#" class="btn btn-secondary">
+                        Editar
+                    </a>
+
+                    <form action="{{ route('product.destroy', $product->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">
+                            Eliminar
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
         </div>
-</div>
-    @endforeach
 
-    
+        @empty
+
+        <p>No hay productos disponibles.</p>
+
+        @endforelse
+
+    </div>
 </div>
 
 @endsection

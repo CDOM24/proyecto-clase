@@ -2,38 +2,54 @@
 
 @section('content')
 
-<!-- CONTENIDO -->
 <div class="detail-wrapper">
 
     <div class="detail-grid">
 
-        <!-- IMAGEN -->
         <div class="product-image">
-            <img src="https://picsum.photos/600/400?9">
+            @if ($product->image)
+                <img src="{{ asset('storage/' . $product->image) }}" alt="">
+            @else
+                <img src="https://picsum.photos/600/400" alt="">
+            @endif
         </div>
 
-        <!-- INFORMACIÓN -->
         <div class="product-info">
-            <h2>Teclado Mecánico RGB Pro X</h2>
-            <div class="product-id">ID Producto: #1024</div>
+            <h2>{{ $product->name }}</h2>
 
-            <div class="rating">★★★★★</div>
+            <div class="product-id">
+                ID Producto: #{{ $product->id }}
+            </div>
 
-            <div class="price">$129.99</div>
+            <div class="price">
+                ${{ number_format($product->price, 2) }}
+            </div>
 
-            <div class="status available">Disponible</div>
+            <div class="status available">
+                Disponible
+            </div>
 
             <div class="description">
-                Teclado mecánico profesional con switches de alta precisión,
-                iluminación RGB personalizable y estructura de aluminio.
-                Ideal para gaming competitivo y productividad avanzada.
+                {{ $product->description }}
             </div>
 
             <div class="actions">
-                <button class="btn btn-primary">Agregar al carrito</button>
-                <button class="btn btn-secondary">Volver</button>
+
+                <a href="{{ route('product.index') }}" class="btn btn-secondary">
+                    Volver
+                </a>
+
+                <form action="{{ route('product.destroy', $product->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">
+                        Eliminar
+                    </button>
+                </form>
+
             </div>
-        
+        </div>
+
     </div>
 
 </div>
