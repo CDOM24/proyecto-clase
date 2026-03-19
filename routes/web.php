@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\CartController;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -37,4 +39,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::delete('/{id}', 'destroy')->name('destroy');
     });
 
+});
+Route::prefix('cart')->name('cart.')->controller(CartController::class)->group(function(){
+    Route::get('/', 'index')->name('index');
+    Route::post('/agregar/{id}', 'agregar')->name('agregar');
+    Route::delete('/quitar/{id}', 'quitar')->name('quitar');
+    Route::post('/vaciar', 'vaciar')->name('vaciar');
 });

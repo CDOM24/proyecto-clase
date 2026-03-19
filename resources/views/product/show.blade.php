@@ -7,15 +7,14 @@
     <div class="detail-grid">
 
         <div class="product-image">
-            @if ($product->image && file_exists(public_path('storage/' . $product->image)))
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+            @if ($product->image)
+                <img src="{{ asset('storage/' . $product->image) }}" alt="">
             @else
-                <img src="https://via.placeholder.com/600x400?text=Sin+imagen" alt="{{ $product->name }}">
+                <img src="https://picsum.photos/600/400" alt="">
             @endif
         </div>
 
         <div class="product-info">
-
             <h2>{{ $product->name }}</h2>
 
             <div class="product-id">
@@ -27,27 +26,30 @@
             </div>
 
             <div class="status available">
-                {{ __('messages.disponible') }}
+                Disponible
             </div>
 
-            <div class="description" style="margin: 20px 0; line-height: 1.6;">
+            <div class="description">
                 {{ $product->description }}
             </div>
 
-            <div class="actions" style="display:flex; gap:15px; flex-wrap:wrap; margin-top:20px;">
+            <div class="actions">
 
-                <a href="{{ route('product.index') }}" class="btn">
-                    ← Volver
+                <a href="{{ route('product.index') }}" class="btn btn-secondary">
+                    Volver
                 </a>
 
-                <a href="{{ route('product.create') }}" class="btn">
-                    + Agregar otro
-                </a>
+                <form action="{{ route('cart.agregar', $product->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn">
+                        🛒 Agregar al carrito
+                    </button>
+                </form>
 
                 <form action="{{ route('product.destroy', $product->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn" onclick="return confirm('¿Seguro que deseas eliminar este producto?')">
+                    <button type="submit" class="btn btn-danger">
                         {{ __('messages.eliminar') }}
                     </button>
                 </form>
