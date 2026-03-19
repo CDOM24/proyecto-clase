@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use Illuminate\Support\Facades\Storage;
-
 
 class ProductController extends Controller
 {
@@ -28,41 +26,20 @@ class ProductController extends Controller
         ]);
     }
 
-    public function show($id)
-    {
-        $product = Product::findOrFail($id);
-
-        return view("product.show", [
-            "product" => $product
-        ]);
-    }
-
-    public function destroy($id)
+    public function store(Request $request)
 {
-    $product = Product::findOrFail($id);
-
-    if ($product->image) {
-        Storage::disk('public')->delete($product->image);
-    }
-
-    $product->delete();
-
-    return redirect()->route("product.index");
-}
-   public function store(Request $request)
-{ 
     $request->validate([
-        'nombre' => 'required|string|max:255',
+        'nombre'      => 'required|string|max:255',
         'descripcion' => 'required|string',
-        'precio' => 'required|numeric|min:0',
-        'categoria' => 'required|exists:categories,id',
-        'imagen' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+        'precio'      => 'required|numeric|min:0',
+        'categoria'   => 'required|exists:categories,id',
+        'imagen'      => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
     ]);
 
     $newProduct = new Product();
-    $newProduct->name = $request->nombre;
+    $newProduct->name        = $request->nombre;
     $newProduct->description = $request->descripcion;
-    $newProduct->price = $request->precio;
+    $newProduct->price       = $request->precio;
     $newProduct->category_id = $request->categoria;
 
     if ($request->hasFile("imagen")) {
@@ -73,6 +50,23 @@ class ProductController extends Controller
     $newProduct->save();
 
     return redirect()->route("product.index")
-    ->with('success', 'Producto creado correctamente');
+        ->with('success', 'Producto creado correctamente');
 }
+
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+
+        return view("product.show", [
+            "product" => $product
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route("product.index");
+    }
 }

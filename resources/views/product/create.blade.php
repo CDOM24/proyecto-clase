@@ -7,18 +7,19 @@
     <div class="form-card">
 
         <div class="form-header">
-            <h2>Agregar Nuevo Producto</h2>
+            <h2>{{ __('messages.crear_producto') }}</h2>
         </div>
 
         @if ($errors->any())
-            <div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    <div class="error-box">
+        <p>{{ __('messages.errores') }}</p>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
         <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -36,7 +37,7 @@
             <div class="row">
 
                 <div class="form-group">
-                    <label for="precio">Precio</label>
+                    <label for="precio">{{ __('messages.precio') }}</label>
                     <input 
                         type="number" 
                         id="precio" 
@@ -47,7 +48,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="categoria">Categoría</label>
+                    <label for="categoria">{{ __('messages.categoria') }}</label>
                     <select id="categoria" name="categoria">
                         @foreach ($categoryList as $category)
                             <option value="{{ $category->id }}">
@@ -60,7 +61,7 @@
             </div>
 
             <div class="form-group">
-                <label for="imagen">Imagen</label>
+                <label for="imagen">{{ __('messages.imagen') }}</label>
                 <input 
                     type="file" 
                     id="imagen" 
@@ -69,7 +70,7 @@
             </div>
 
             <div class="form-group">
-                <label for="descripcion">Descripción</label>
+                <label for="descripcion">{{ __('messages.descripcion') }}</label>
                 <textarea 
                     id="descripcion" 
                     name="descripcion"
@@ -77,7 +78,7 @@
             </div>
 
             <button type="submit">
-                Guardar Producto
+                {{ __('messages.guardar') }}
             </button>
 
         </form>
@@ -86,4 +87,4 @@
 
 </div>
 
-@endsection 
+@endsection

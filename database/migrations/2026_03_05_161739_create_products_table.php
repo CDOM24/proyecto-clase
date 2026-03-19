@@ -13,7 +13,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->decimal('price');
+            $table->decimal('price', 15, 2);;
             $table->foreignID('category_id')->references('id')->on('categories');
             $table->timestamps();
         });

@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Product;
+use App\Models\Category;
 
 class HomeController extends Controller
 {
-    public function _invoke()
+    public function index()
     {
-        return view("welcome");
+        $products = Product::orderBy('id', 'desc')->take(6)->get();
+        $categories = Category::all();
+
+        return view("welcome", [
+            "products"   => $products,
+            "categories" => $categories
+        ]);
     }
 }

@@ -43,7 +43,7 @@
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">
-                        Eliminar
+                        {{ __('messages.eliminar') }}
                     </button>
                 </form>
 

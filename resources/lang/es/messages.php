@@ -10,5 +10,6 @@ return [
     'imagen' => 'Imagen',
     'eliminar' => 'Eliminar',
     'editar' => 'Editar',
-    'detalles' => 'Detalles'
+    'detalles' => 'Detalles',
+    'errores' => 'Por favor corrige los siguientes errores:',
 ];

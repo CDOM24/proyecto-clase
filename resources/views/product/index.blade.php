@@ -33,18 +33,18 @@
                 <div class="card-actions">
 
                     <a href="{{ route('product.show', $product->id) }}" class="btn btn-primary">
-                        Detalles
+                        {{ __('messages.detalles') }}
                     </a>
 
                     <a href="#" class="btn btn-secondary">
-                        Editar
+                        {{ __('messages.editar') }}
                     </a>
 
                     <form action="{{ route('product.destroy', $product->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">
-                            Eliminar
+                            {{ __('messages.eliminar') }}
                         </button>
                     </form>
 
