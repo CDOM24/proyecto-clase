@@ -4,6 +4,8 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\Admin\AdminController;
+
 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -29,3 +31,9 @@ Route::prefix("product")->group(function(){
     });
 
 });
+Route::prefix('admin')->name('admin.')->group(function(){
+    Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::get('/categorias', [AdminController::class, 'index'])->name('categorias.index');
+});
+    
+
