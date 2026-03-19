@@ -12,4 +12,5 @@ return [
     'editar' => 'Editar',
     'detalles' => 'Detalles',
     'errores' => 'Por favor corrige los siguientes errores:',
+    'disponible' => 'Disponible'
 ];

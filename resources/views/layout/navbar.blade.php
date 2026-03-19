@@ -2,9 +2,9 @@
     <div class="nav-container">
         <h1 class="logo">✨ Tienda</h1>
         <nav>
-            <a href="#">Inicio</a>
-            <a href="#">Productos</a>
-            <a href="#">Agregar</a>
+            <a href="{{ route('home') }}">Inicio</a>
+            <a href="{{ route('product.index') }}">Productos</a>
+            <a href="{{ route('product.create') }}">Agregar</a>
         </nav>
     </div>
 </header>
